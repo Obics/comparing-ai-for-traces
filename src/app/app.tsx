@@ -1,5 +1,6 @@
 // import "ClaudeV3_OpenTelemetryTraceViewer" from "./ClaudeV3_OpenTelemetryTraceViewer";
 
+import { TraceTable as ChatGPT } from "./chatgpt/chatgpt-v1";
 import ClaudeV3_OpenTelemetryTraceViewer from "./claude-v3";
 import { exampleTraces } from "./data";
 import {TraceViewer as DeepSeekV3} from "./deepseek/deep-seek-v3";
@@ -25,6 +26,12 @@ function App() {
       <DeepSeekV3 spans={exampleTraces} />
     </div>
 
+    <div className='max-w-[1000px] mx-auto text-center'>
+      <h3 className="text-xl text-center my-5">DeepSeek</h3>
+      <ChatGPT spans={exampleTraces} />
+    </div>
+
+    <div className="h-60"></div>
   </>)
 }
 
