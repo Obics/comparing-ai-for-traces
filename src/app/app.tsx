@@ -5,8 +5,10 @@ import ChatGPTV4 from "./chatgpt/chatgpt-v4";
 import ClaudeV3_OpenTelemetryTraceViewer from "./claude-v3";
 import { exampleTraces } from "./data";
 import {TraceViewer as DeepSeekV3} from "./deepseek/deep-seek-v3";
+import DeepSeekV4 from "./deepseek/deep-seek-v4";
 import { TraceViewer as V0} from "./v0/trace-viewer";
 import { TraceViewer as V0V2} from "./v0/trace-viewer-v2.tsx";
+import { TraceViewerEnhanced as V0V3} from "./v0/trace-viewer-enchanced-v3.tsx";
 import GeminiV1 from "./gemini/gemini-v1.tsx";
 import GeminiV2 from "./gemini/gemini-v2.tsx";
 import GeminiV3 from "./gemini/gemini-v3.tsx";
@@ -17,6 +19,7 @@ function App() {
     <h2 className="text-xl text-center">React waterfall component using different AI models along with iteration</h2>
 
     <div className='max-w-[1000px] mx-auto text-center'>
+      <a href="https://claude.site/artifacts/fe86555a-03bb-430c-8fa9-64eb5708b0c3" className="text-lg text-blue-500 text-center mx-auto">Claude Full Conversation</a>
       <h3 className="text-xl text-center my-5">Claude</h3>
       <ClaudeV3_OpenTelemetryTraceViewer />
     </div>
@@ -32,8 +35,19 @@ function App() {
     </div>
 
     <div className='max-w-[1000px] mx-auto text-center'>
-      <h3 className="text-xl text-center my-5">DeepSeek</h3>
+      <h3 className="text-xl text-center my-5">Vercel V0 - V3</h3>
+      <V0V3 spans={exampleTraces} />
+    </div>
+
+    <div className='max-w-[1000px] mx-auto text-center'>
+      <h3 className="text-xl text-center my-5">DeepSeek V3</h3>
       <DeepSeekV3 spans={exampleTraces} />
+    </div>
+
+    <div className='max-w-[1000px] mx-auto text-center'>
+      <h3 className="text-xl text-center my-5">DeepSeek V4</h3>
+      <span>DeepSeek broke completely after asking for smooth transitions...</span>
+      {/* <DeepSeekV4 spans={exampleTraces} /> */}
     </div>
 
     <div className='max-w-[1000px] mx-auto text-center'>
