@@ -1,10 +1,15 @@
-// import "ClaudeV3_OpenTelemetryTraceViewer" from "./ClaudeV3_OpenTelemetryTraceViewer";
-
-import { TraceTable as ChatGPT } from "./chatgpt/chatgpt-v1";
+import { TraceTable as ChatGPTV1 } from "./chatgpt/chatgpt-v1";
+import ChatGPTV2 from "./chatgpt/chatgpt-v2";
+import ChatGPTV3 from "./chatgpt/chatgpt-v3";
+import ChatGPTV4 from "./chatgpt/chatgpt-v4";
 import ClaudeV3_OpenTelemetryTraceViewer from "./claude-v3";
 import { exampleTraces } from "./data";
 import {TraceViewer as DeepSeekV3} from "./deepseek/deep-seek-v3";
 import { TraceViewer as V0} from "./v0/trace-viewer";
+import { TraceViewer as V0V2} from "./v0/trace-viewer-v2.tsx";
+import GeminiV1 from "./gemini/gemini-v1.tsx";
+import GeminiV2 from "./gemini/gemini-v2.tsx";
+import GeminiV3 from "./gemini/gemini-v3.tsx";
 
 function App() {
   return (<>
@@ -17,8 +22,13 @@ function App() {
     </div>
 
     <div className='max-w-[1000px] mx-auto text-center'>
-      <h3 className="text-xl text-center my-5">Vercel V0</h3>
+      <h3 className="text-xl text-center my-5">Vercel V0 - V1</h3>
       <V0 spans={exampleTraces} />
+    </div>
+
+    <div className='max-w-[1000px] mx-auto text-center'>
+      <h3 className="text-xl text-center my-5">Vercel V0 - V2</h3>
+      <V0V2 spans={exampleTraces} />
     </div>
 
     <div className='max-w-[1000px] mx-auto text-center'>
@@ -27,8 +37,42 @@ function App() {
     </div>
 
     <div className='max-w-[1000px] mx-auto text-center'>
-      <h3 className="text-xl text-center my-5">DeepSeek</h3>
-      <ChatGPT spans={exampleTraces} />
+      <a href="https://chatgpt.com/share/67f4ebb2-9f1c-8010-8326-90e3b2484f38" className="text-lg text-blue-500 text-center mx-auto">ChatGPT Full Conversation</a>
+
+      <h3 className="text-xl text-center my-5">ChatGPT V1</h3>
+      <ChatGPTV1 spans={exampleTraces} />
+    </div>
+
+    <div className='max-w-[1000px] mx-auto text-center'>
+      <h3 className="text-xl text-center my-5">ChatGPT V2</h3>
+      <ChatGPTV2 spans={exampleTraces} />
+    </div>
+
+    <div className='max-w-[1000px] mx-auto text-center'>
+      <h3 className="text-xl text-center my-5">ChatGPT V3</h3>
+      <ChatGPTV3 spans={exampleTraces} />
+    </div>
+
+    <div className='max-w-[1000px] mx-auto text-center'>
+      <h3 className="text-xl text-center my-5">ChatGPT V4</h3>
+      <ChatGPTV4 spans={exampleTraces} />
+    </div>
+
+
+    <div className='max-w-[1000px] mx-auto text-center mt-20'>
+      <a href="https://g.co/gemini/share/214cb3daf768" className="text-lg text-blue-500 text-center mx-auto">Gemini Full Conversation</a>
+      <h3 className="text-xl text-center my-5">Gemini V1</h3>
+      <GeminiV1 spans={exampleTraces} />
+    </div>
+
+    <div className='max-w-[1000px] mx-auto text-center'>
+      <h3 className="text-xl text-center my-5">Gemini V2</h3>
+      <GeminiV2 spans={exampleTraces} />
+    </div>
+
+    <div className='max-w-[1000px] mx-auto text-center'>
+      <h3 className="text-xl text-center my-5">Gemini V3</h3>
+      <GeminiV3 spans={exampleTraces} />
     </div>
 
     <div className="h-60"></div>
