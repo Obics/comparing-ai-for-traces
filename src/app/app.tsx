@@ -2,7 +2,8 @@
 
 import ClaudeV3_OpenTelemetryTraceViewer from "./claude-v3";
 import { exampleTraces } from "./data";
-import { TraceViewer } from "./v0/trace-viewer";
+import {TraceViewer as DeepSeekV3} from "./deepseek/deep-seek-v3";
+import { TraceViewer as V0} from "./v0/trace-viewer";
 
 function App() {
   return (<>
@@ -16,7 +17,12 @@ function App() {
 
     <div className='max-w-[1000px] mx-auto text-center'>
       <h3 className="text-xl text-center my-5">Vercel V0</h3>
-      <TraceViewer spans={exampleTraces} />
+      <V0 spans={exampleTraces} />
+    </div>
+
+    <div className='max-w-[1000px] mx-auto text-center'>
+      <h3 className="text-xl text-center my-5">DeepSeek</h3>
+      <DeepSeekV3 spans={exampleTraces} />
     </div>
 
   </>)
