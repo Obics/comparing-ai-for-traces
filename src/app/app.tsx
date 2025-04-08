@@ -25,6 +25,7 @@ function App() {
     </div>
 
     <div className='max-w-[1000px] mx-auto text-center'>
+      <a href="https://v0.dev/chat/image-analysis-4IFRzmfCSRA" className="text-lg text-blue-500 text-center mx-auto">V0 Full Conversation</a>
       <h3 className="text-xl text-center my-5">Vercel V0 - V1</h3>
       <V0 spans={exampleTraces} />
     </div>
