@@ -270,9 +270,12 @@ const ClaudeV3_OpenTelemetryTraceViewer = () => {
 
   // Add event listener for keyboard navigation
   useEffect(() => {
-    document.addEventListener('keydown', handleKeyDown);
+    // find by id claude-v3-id
+    const element = document.getElementById('claude-v3-id');
+    if (!element) return;
+    element.addEventListener('keydown', handleKeyDown);
     return () => {
-      document.removeEventListener('keydown', handleKeyDown);
+      element.removeEventListener('keydown', handleKeyDown);
     };
   }, [handleKeyDown]);
 
@@ -286,7 +289,7 @@ const ClaudeV3_OpenTelemetryTraceViewer = () => {
     const widthPercentage = (span.duration_ms / totalDuration) * 100;
     
     return (
-      <React.Fragment key={span.span_id}>
+      <React.Fragment key={span.span_id} >
         <tr 
           className={`border-b border-gray-200 ${isSelected ? 'outline outline-2 outline-blue-500' : ''}`}
           onClick={() => setSelectedSpanId(span.span_id)}
@@ -368,7 +371,7 @@ const ClaudeV3_OpenTelemetryTraceViewer = () => {
   }, [selectedSpanId]);
 
   return (
-    <div className="w-full max-w-6xl mx-auto bg-white shadow-md rounded-lg overflow-hidden">
+    <div className="w-full max-w-6xl mx-auto bg-white shadow-md rounded-lg overflow-hidden" id="claude-v3-id">
       <div className="p-4 bg-gray-50 border-b border-gray-200">
         <h2 className="text-lg font-semibold">OpenTelemetry Trace Viewer</h2>
         <p className="text-sm text-gray-600">Total Duration: {totalDuration} ms</p>

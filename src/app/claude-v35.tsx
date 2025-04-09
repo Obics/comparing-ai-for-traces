@@ -178,9 +178,11 @@ const WaterfallClaude = ({spans}) => {
 
   // Add event listener for keyboard navigation
   useEffect(() => {
-    document.addEventListener('keydown', handleKeyDown);
+    const element = document.getElementById('claude-v3-id');
+    if (!element) return;
+    element.addEventListener('keydown', handleKeyDown);
     return () => {
-      document.removeEventListener('keydown', handleKeyDown);
+      element.removeEventListener('keydown', handleKeyDown);
     };
   }, [handleKeyDown]);
 

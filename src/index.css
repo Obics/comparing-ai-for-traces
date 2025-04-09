@@ -34,4 +34,8 @@
     -webkit-animation: slide 2s linear infinite;
     animation: slide 4s linear infinite;
   }
+
+  h3 {
+    @apply text-2xl font-bold text-blue-800 my-10;
+  }
 }
