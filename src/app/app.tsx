@@ -24,6 +24,8 @@ function App() {
       <ClaudeV3_OpenTelemetryTraceViewer />
     </div>
 
+    <hr className="my-10"/>
+
     <div className='max-w-[1000px] mx-auto text-center'>
       <a href="https://v0.dev/chat/image-analysis-4IFRzmfCSRA" className="text-lg text-blue-500 text-center mx-auto">V0 Full Conversation</a>
       <h3 className="text-xl text-center my-5">Vercel V0 - V1</h3>
@@ -39,6 +41,7 @@ function App() {
       <h3 className="text-xl text-center my-5">Vercel V0 - V3</h3>
       <V0V3 spans={exampleTraces} />
     </div>
+    <hr className="my-10"/>
 
     <div className='max-w-[1000px] mx-auto text-center'>
       <h3 className="text-xl text-center my-5">DeepSeek V3</h3>
@@ -50,6 +53,8 @@ function App() {
       <span>DeepSeek broke completely after asking for smooth transitions...</span>
       {/* <DeepSeekV4 spans={exampleTraces} /> */}
     </div>
+
+    <hr className="my-10"/>
 
     <div className='max-w-[1000px] mx-auto text-center'>
       <a href="https://chatgpt.com/share/67f4ebb2-9f1c-8010-8326-90e3b2484f38" className="text-lg text-blue-500 text-center mx-auto">ChatGPT Full Conversation</a>
@@ -73,6 +78,7 @@ function App() {
       <ChatGPTV4 spans={exampleTraces} />
     </div>
 
+    <hr className="my-10"/>
 
     <div className='max-w-[1000px] mx-auto text-center mt-20'>
       <a href="https://g.co/gemini/share/214cb3daf768" className="text-lg text-blue-500 text-center mx-auto">Gemini Full Conversation</a>
