@@ -14,6 +14,14 @@
     }
   }
 
+  .waterfalldiv{
+    text-align: center;
+    max-width: 1000px;
+    min-height: 200px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
   main {
     @apply px-4 min-h-screen sm:px-0 space-y-16 w-full bg-gray-900;
     background-image: radial-gradient(

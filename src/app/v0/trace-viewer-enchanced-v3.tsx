@@ -428,50 +428,7 @@ export const TraceViewerEnhanced: React.FC<TraceViewerProps> = ({ spans, colorBy
         </table>
       </div>
 
-      {selectedSpanDetails && (
-        <div className="border rounded-lg p-4 bg-gray-50">
-          <h3 className="text-lg font-medium mb-2">Span Details</h3>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div>
-              <div className="flex items-center gap-2 mb-2">
-                <Tag size={16} className="text-gray-500" />
-                <span className="font-medium">Name:</span> {selectedSpanDetails.span_name}
-              </div>
-              <div className="flex items-center gap-2 mb-2">
-                <Server size={16} className="text-gray-500" />
-                <span className="font-medium">Service:</span> {selectedSpanDetails.service}
-              </div>
-              <div className="flex items-center gap-2 mb-2">
-                <Clock size={16} className="text-gray-500" />
-                <span className="font-medium">Duration:</span> {selectedSpanDetails.duration_ms}ms
-              </div>
-            </div>
-            <div>
-              <div className="mb-2">
-                <span className="font-medium">Timestamp:</span> {formatTimestamp(selectedSpanDetails.timestamp)}
-              </div>
-              <div className="mb-2">
-                <span className="font-medium">Span ID:</span>{" "}
-                <code className="bg-gray-100 px-1 rounded">{selectedSpanDetails.span_id}</code>
-              </div>
-              <div className="mb-2">
-                <span className="font-medium">Parent Span ID:</span>{" "}
-                <code className="bg-gray-100 px-1 rounded">{selectedSpanDetails.parent_span_id || "None (Root)"}</code>
-              </div>
-            </div>
-            {selectedSpanDetails.method && selectedSpanDetails.url && (
-              <div className="col-span-1 md:col-span-2">
-                <div className="mb-2">
-                  <span className="font-medium">Request:</span> {selectedSpanDetails.method} {selectedSpanDetails.url}
-                </div>
-                <div className="mb-2">
-                  <span className="font-medium">Status:</span> {selectedSpanDetails.status_code}
-                </div>
-              </div>
-            )}
-          </div>
-        </div>
-      )}
+      
     </div>
   )
 }

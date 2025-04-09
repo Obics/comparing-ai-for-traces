@@ -1,114 +1,22 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
+// import { FaSquare } from 'react-icons/fa';
+// import { stringToColor } from 'src/utils/general-utils';
 
-const ClaudeV3_OpenTelemetryTraceViewer = () => {
+const WaterfallClaude = ({spans}) => {
   const [traces, setTraces] = useState([]);
   const [expandedSpans, setExpandedSpans] = useState({});
   const [totalDuration, setTotalDuration] = useState(0);
-  const [minTimestamp, setMinTimestamp] = useState(0);
   const [timeMarkers, setTimeMarkers] = useState([]);
-  const [selectedSpanId, setSelectedSpanId] = useState(null);
+  // const [selectedSpanIdInWaterfall, setSelectedSpanIdInWaterfall] = useState(null);
   const [flattenedVisibleSpans, setFlattenedVisibleSpans] = useState([]);
   const tableRef = useRef(null);
 
+  // const selectedSpanIdInWaterfall = useTraceStore((state) => state.selectedSpanIdInWaterfall);
+  // const setSelectedSpanIdInWaterfall = useTraceStore((state) => state.setSelectedSpanIdInWaterfall);
+
+  const [selectedSpanIdInWaterfall, setSelectedSpanIdInWaterfall] = useState(null);
   // Sample data
-  const sampleData = [
-    {
-      "timestamp": "2025-03-27 11:21:28.304",
-      "service": "nodebb",
-      "span_kind": "Client",
-      "method": "GET",
-      "url": "http://161.35.219.112:4567/category/4/comments-feedback",
-      "span_name": "GET /category/:category_id/:slug?",
-      "span_id": "0f5622ba68b655f2",
-      "parent_span_id": "",
-      "status_code": "Unset",
-      "duration_ms": 113
-    },
-    {
-      "timestamp": "2025-03-27 11:21:28.313",
-      "service": "nodebb",
-      "span_kind": "Producer",
-      "method": "POST",
-      "url": "https://forumanalytics.fly.dev/addPageView",
-      "span_name": "POST",
-      "span_id": "d38e5d515170cf33",
-      "parent_span_id": "0f5622ba68b655f2",
-      "status_code": "200",
-      "duration_ms": 101
-    },
-    {
-      "timestamp": "2025-03-27 11:21:28.313",
-      "service": "ForumAnalytics",
-      "span_kind": "Client",
-      "method": "POST",
-      "url": "/addPageView",
-      "span_name": "POST /addPageView",
-      "span_id": "9bc05f94bdf2f3d4",
-      "parent_span_id": "d38e5d515170cf33",
-      "status_code": "200",
-      "duration_ms": 34
-    },
-    {
-      "timestamp": "2025-03-27 11:21:28.338",
-      "service": "ForumAnalytics",
-      "span_kind": "Producer",
-      "method": "",
-      "url": "",
-      "span_name": "forumanalytics",
-      "span_id": "67fdf28209a5f513",
-      "parent_span_id": "9bc05f94bdf2f3d4",
-      "status_code": "Ok",
-      "duration_ms": 9
-    },
-    {
-      "timestamp": "2025-03-27 11:21:28.330",
-      "service": "nodebb",
-      "span_kind": "Producer",
-      "method": "",
-      "url": "",
-      "span_name": "mongodb.find",
-      "span_id": "6783ea2333e666b0",
-      "parent_span_id": "0f5622ba68b655f2",
-      "status_code": "Unset",
-      "duration_ms": 16
-    },
-    {
-      "timestamp": "2025-03-27 11:21:28.330",
-      "service": "nodebb",
-      "span_kind": "Producer",
-      "method": "",
-      "url": "",
-      "span_name": "mongodb.find",
-      "span_id": "7a2f25dc0c1a4b94",
-      "parent_span_id": "0f5622ba68b655f2",
-      "status_code": "Unset",
-      "duration_ms": 16
-    },
-    {
-      "timestamp": "2025-03-27 11:21:28.347",
-      "service": "nodebb",
-      "span_kind": "Producer",
-      "method": "",
-      "url": "",
-      "span_name": "mongodb.find",
-      "span_id": "d272851bc003c40b",
-      "parent_span_id": "0f5622ba68b655f2",
-      "status_code": "Unset",
-      "duration_ms": 32
-    },
-    {
-      "timestamp": "2025-03-27 11:21:28.387",
-      "service": "nodebb",
-      "span_kind": "Producer",
-      "method": "",
-      "url": "",
-      "span_name": "mongodb.update",
-      "span_id": "d09f3d6c1a049742",
-      "parent_span_id": "0f5622ba68b655f2",
-      "status_code": "Unset",
-      "duration_ms": 29
-    }
-  ];
+  
 
   // Helper function to parse timestamp to milliseconds
   const parseTimestamp = (timestamp) => {
@@ -153,16 +61,16 @@ const ClaudeV3_OpenTelemetryTraceViewer = () => {
       setFlattenedVisibleSpans(flattened);
       
       // If no span is selected yet, select the first one
-      if (!selectedSpanId && flattened.length > 0) {
-        setSelectedSpanId(flattened[0].span_id);
+      if (!selectedSpanIdInWaterfall && flattened.length > 0) {
+        setSelectedSpanIdInWaterfall(flattened[0].span_id);
       }
     }
-  }, [traces, expandedSpans, getFlattenedVisibleSpans, selectedSpanId]);
+  }, [traces, expandedSpans, getFlattenedVisibleSpans, selectedSpanIdInWaterfall]);
 
   // Build the trace tree and calculate necessary values
   useEffect(() => {
     // Sort traces by timestamp
-    const sortedTraces = [...sampleData].sort((a, b) => 
+    const sortedTraces = [...spans].sort((a, b) => 
       parseTimestamp(a.timestamp) - parseTimestamp(b.timestamp)
     );
 
@@ -176,7 +84,7 @@ const ClaudeV3_OpenTelemetryTraceViewer = () => {
 
     // Find minimum timestamp (start time) and calculate total duration
     const minTime = parseTimestamp(rootSpan.timestamp);
-    setMinTimestamp(minTime);
+    // setMinTimestamp(minTime);
     setTotalDuration(rootSpan.duration_ms);
     
     // Generate time markers
@@ -210,8 +118,8 @@ const ClaudeV3_OpenTelemetryTraceViewer = () => {
     
     setExpandedSpans(initialExpandedState);
     setTraces([traceTree]);
-    setSelectedSpanId(rootSpan.span_id);
-  }, [sampleData]);
+    setSelectedSpanIdInWaterfall(rootSpan.span_id);
+  }, []);
 
   // Toggle expansion of a span
   const toggleExpand = (spanId) => {
@@ -223,9 +131,9 @@ const ClaudeV3_OpenTelemetryTraceViewer = () => {
 
   // Keyboard navigation handler
   const handleKeyDown = useCallback((e) => {
-    if (!selectedSpanId || flattenedVisibleSpans.length === 0) return;
+    if (!selectedSpanIdInWaterfall || flattenedVisibleSpans.length === 0) return;
 
-    const currentIndex = flattenedVisibleSpans.findIndex(span => span.span_id === selectedSpanId);
+    const currentIndex = flattenedVisibleSpans.findIndex(span => span.span_id === selectedSpanIdInWaterfall);
     if (currentIndex === -1) return;
 
     const currentSpan = flattenedVisibleSpans[currentIndex];
@@ -234,13 +142,13 @@ const ClaudeV3_OpenTelemetryTraceViewer = () => {
       case 'ArrowDown':
         e.preventDefault();
         if (currentIndex < flattenedVisibleSpans.length - 1) {
-          setSelectedSpanId(flattenedVisibleSpans[currentIndex + 1].span_id);
+          setSelectedSpanIdInWaterfall(flattenedVisibleSpans[currentIndex + 1].span_id);
         }
         break;
       case 'ArrowUp':
         e.preventDefault();
         if (currentIndex > 0) {
-          setSelectedSpanId(flattenedVisibleSpans[currentIndex - 1].span_id);
+          setSelectedSpanIdInWaterfall(flattenedVisibleSpans[currentIndex - 1].span_id);
         }
         break;
       case 'ArrowRight':
@@ -260,13 +168,13 @@ const ClaudeV3_OpenTelemetryTraceViewer = () => {
         } 
         // Otherwise go to parent if not at root level
         else if (currentSpan.parent_span_id) {
-          setSelectedSpanId(currentSpan.parent_span_id);
+          setSelectedSpanIdInWaterfall(currentSpan.parent_span_id);
         }
         break;
       default:
         break;
     }
-  }, [selectedSpanId, flattenedVisibleSpans, expandedSpans]);
+  }, [selectedSpanIdInWaterfall, flattenedVisibleSpans, expandedSpans]);
 
   // Add event listener for keyboard navigation
   useEffect(() => {
@@ -280,17 +188,17 @@ const ClaudeV3_OpenTelemetryTraceViewer = () => {
   const renderSpan = (span, level = 0) => {
     const isExpanded = expandedSpans[span.span_id];
     const hasChildren = span.children && span.children.length > 0;
-    const isSelected = selectedSpanId === span.span_id;
+    const isSelected = selectedSpanIdInWaterfall === span.span_id;
     
     const leftPosition = (span.start_time / totalDuration) * 100;
     const widthPercentage = (span.duration_ms / totalDuration) * 100;
     
     return (
-      <React.Fragment key={span.span_id}>
+      <React.Fragment key={span.span_id} >
         <tr 
-          className={`border-b border-gray-200 ${isSelected ? 'outline outline-2 outline-blue-500' : ''}`}
-          onClick={() => setSelectedSpanId(span.span_id)}
-          tabIndex={0}
+          className={`border-b border-gray-200 ${isSelected ? 'outline outline-2 outline-blue-500' : 'outline-none'}`}
+          onClick={() => setSelectedSpanIdInWaterfall(span.span_id)}
+          tabIndex={-1}
           data-span-id={span.span_id}
         >
           <td className="p-2">
@@ -308,9 +216,12 @@ const ClaudeV3_OpenTelemetryTraceViewer = () => {
                   </button>
                 )}
                 {!hasChildren && <div className="w-4 mr-2"></div>}
-                <div className="flex flex-col">
-                  <span className="font-medium">{span.span_name}</span>
-                  <span className="text-xs text-gray-500">{span.service}</span>
+                <div className='nowrap max-w-[300px] overflow-hidden text-ellipsis'>
+                  {/* <span ><FaSquare fill={stringToColor(span.service)} className='inline-block'/></span> */}
+                  &nbsp;
+                  <span className="text-sm text-gray-500 inline-block">{span.service} • </span>
+                  &nbsp;
+                  <span className="text-sm">{span.span_name}</span>
                 </div>
               </div>
             </div>
@@ -321,13 +232,11 @@ const ClaudeV3_OpenTelemetryTraceViewer = () => {
           <td className="p-2 relative">
             <div className="h-6 w-full bg-gray-100 relative">
               <div 
-                className="absolute bg-blue-500 opacity-70"
+                className="absolute h-6 bg-blue-500 opacity-70"
                 style={{ 
                   left: `${leftPosition}%`, 
                   width: `${widthPercentage}%`,
-                  minWidth: '2px',
-                  height: '10px',
-                  backgroundColor: 'blue',
+                  minWidth: '2px'
                 }}
                 title={`${span.span_name} (${span.duration_ms}ms)`}
               ></div>
@@ -359,20 +268,16 @@ const ClaudeV3_OpenTelemetryTraceViewer = () => {
 
   // Scroll selected row into view when selection changes
   useEffect(() => {
-    if (selectedSpanId) {
-      const row = document.querySelector(`[data-span-id="${selectedSpanId}"]`);
+    if (selectedSpanIdInWaterfall) {
+      const row = document.querySelector(`[data-span-id="${selectedSpanIdInWaterfall}"]`);
       if (row) {
         // row.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
       }
     }
-  }, [selectedSpanId]);
+  }, [selectedSpanIdInWaterfall]);
 
   return (
     <div className="w-full max-w-6xl mx-auto bg-white shadow-md rounded-lg overflow-hidden">
-      <div className="p-4 bg-gray-50 border-b border-gray-200">
-        <h2 className="text-lg font-semibold">OpenTelemetry Trace Viewer</h2>
-        <p className="text-sm text-gray-600">Total Duration: {totalDuration} ms</p>
-      </div>
       
       <div className="overflow-x-auto">
         <table className="w-full" ref={tableRef}>
@@ -394,4 +299,4 @@ const ClaudeV3_OpenTelemetryTraceViewer = () => {
   );
 };
 
-export default ClaudeV3_OpenTelemetryTraceViewer;
+export default WaterfallClaude;

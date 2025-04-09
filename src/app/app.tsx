@@ -3,6 +3,7 @@ import ChatGPTV2 from "./chatgpt/chatgpt-v2";
 import ChatGPTV3 from "./chatgpt/chatgpt-v3";
 import ChatGPTV4 from "./chatgpt/chatgpt-v4";
 import ClaudeV3_OpenTelemetryTraceViewer from "./claude-v3";
+import ClaudeV35_OpenTelemetryTraceViewer from "./claude-v35";
 import { exampleTraces } from "./data";
 import {TraceViewer as DeepSeekV3} from "./deepseek/deep-seek-v3";
 import DeepSeekV4 from "./deepseek/deep-seek-v4";
@@ -18,37 +19,43 @@ function App() {
     <h1 className="text-2xl text-center">Gemini vs ChatGPT vs Claude vs DeepSeek vs Vercel v0</h1>
     <h2 className="text-xl text-center">React waterfall component using different AI models along with iteration</h2>
 
-    <div className='max-w-[1000px] mx-auto text-center'>
+    <div className='waterfalldiv'>
       <a href="https://claude.site/artifacts/fe86555a-03bb-430c-8fa9-64eb5708b0c3" className="text-lg text-blue-500 text-center mx-auto">Claude Full Conversation</a>
       <h3 className="text-xl text-center my-5">Claude</h3>
       <ClaudeV3_OpenTelemetryTraceViewer />
     </div>
 
+    <div className='waterfalldiv'>
+      <a href="https://claude.site/artifacts/fe86555a-03bb-430c-8fa9-64eb5708b0c3" className="text-lg text-blue-500 text-center mx-auto">Claude Full Conversation</a>
+      <h3 className="text-xl text-center my-5">Claude (with my own minor changes)</h3>
+      <ClaudeV35_OpenTelemetryTraceViewer spans={exampleTraces} />
+    </div>
+
     <hr className="my-10"/>
 
-    <div className='max-w-[1000px] mx-auto text-center'>
+    <div className='waterfalldiv'>
       <a href="https://v0.dev/chat/image-analysis-4IFRzmfCSRA" className="text-lg text-blue-500 text-center mx-auto">V0 Full Conversation</a>
       <h3 className="text-xl text-center my-5">Vercel V0 - V1</h3>
       <V0 spans={exampleTraces} />
     </div>
 
-    <div className='max-w-[1000px] mx-auto text-center'>
+    <div className='waterfalldiv'>
       <h3 className="text-xl text-center my-5">Vercel V0 - V2</h3>
       <V0V2 spans={exampleTraces} />
     </div>
 
-    <div className='max-w-[1000px] mx-auto text-center'>
+    <div className='waterfalldiv'>
       <h3 className="text-xl text-center my-5">Vercel V0 - V3</h3>
       <V0V3 spans={exampleTraces} />
     </div>
     <hr className="my-10"/>
 
-    <div className='max-w-[1000px] mx-auto text-center'>
+    <div className='waterfalldiv'>
       <h3 className="text-xl text-center my-5">DeepSeek V3</h3>
       <DeepSeekV3 spans={exampleTraces} />
     </div>
 
-    <div className='max-w-[1000px] mx-auto text-center'>
+    <div className='waterfalldiv'>
       <h3 className="text-xl text-center my-5">DeepSeek V4</h3>
       <span>DeepSeek broke completely after asking for smooth transitions...</span>
       {/* <DeepSeekV4 spans={exampleTraces} /> */}
@@ -56,24 +63,24 @@ function App() {
 
     <hr className="my-10"/>
 
-    <div className='max-w-[1000px] mx-auto text-center'>
+    <div className='waterfalldiv'>
       <a href="https://chatgpt.com/share/67f4ebb2-9f1c-8010-8326-90e3b2484f38" className="text-lg text-blue-500 text-center mx-auto">ChatGPT Full Conversation</a>
 
       <h3 className="text-xl text-center my-5">ChatGPT V1</h3>
       <ChatGPTV1 spans={exampleTraces} />
     </div>
 
-    <div className='max-w-[1000px] mx-auto text-center'>
+    <div className='waterfalldiv'>
       <h3 className="text-xl text-center my-5">ChatGPT V2</h3>
       <ChatGPTV2 spans={exampleTraces} />
     </div>
 
-    <div className='max-w-[1000px] mx-auto text-center'>
+    <div className='waterfalldiv'>
       <h3 className="text-xl text-center my-5">ChatGPT V3</h3>
       <ChatGPTV3 spans={exampleTraces} />
     </div>
 
-    <div className='max-w-[1000px] mx-auto text-center'>
+    <div className='waterfalldiv'>
       <h3 className="text-xl text-center my-5">ChatGPT V4</h3>
       <ChatGPTV4 spans={exampleTraces} />
     </div>
@@ -86,12 +93,12 @@ function App() {
       <GeminiV1 spans={exampleTraces} />
     </div>
 
-    <div className='max-w-[1000px] mx-auto text-center'>
+    <div className='waterfalldiv'>
       <h3 className="text-xl text-center my-5">Gemini V2</h3>
       <GeminiV2 spans={exampleTraces} />
     </div>
 
-    <div className='max-w-[1000px] mx-auto text-center'>
+    <div className='waterfalldiv'>
       <h3 className="text-xl text-center my-5">Gemini V3</h3>
       <GeminiV3 spans={exampleTraces} />
     </div>
