@@ -18,6 +18,7 @@ import Gemini25ProV1 from "./gemini25Pro/gemini25-v1.tsx";
 import Gemini25ProV2 from "./gemini25Pro/gemini25-v2.tsx";
 import Gemini25ProV3 from "./gemini25Pro/gemini25-v3.tsx";
 import Gemini25ProV4 from "./gemini25Pro/gemini25-v4.tsx";
+import Gemini25ProV5 from "./gemini25Pro/gemini25-v5.tsx";
 
 function App() {
   return (
@@ -143,6 +144,11 @@ function App() {
     <div className='waterfalldiv' >
       <h3 >Gemini 2.5 Pro V4</h3>
       <Gemini25ProV4 spans={exampleTraces} />
+    </div>
+
+    <div className='waterfalldiv' >
+      <h3 >Gemini 2.5 Pro V5</h3>
+      <Gemini25ProV5 spans={exampleTraces} />
     </div>
 
     <div className="h-60"></div>

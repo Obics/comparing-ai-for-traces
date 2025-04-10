@@ -1,0 +1,46 @@
+/* Smooth Expand/Collapse Transitions */
+.row-collapse-wrapper {
+  /* Base styles for the wrapper */
+  overflow: hidden;
+  transition: max-height 0.3s ease-in-out, opacity 0.2s ease-in-out;
+}
+
+/* Entering state (starting point) */
+.row-enter {
+  opacity: 0;
+  max-height: 0;
+}
+/* Entering active state (target) */
+.row-enter-active {
+  opacity: 1;
+  /* Set max-height to a value larger than any expected row content */
+  /* Adjust if necessary */
+  max-height: 100px;
+  transition: max-height 0.3s ease-in-out, opacity 0.2s ease-in-out 0.1s; /* Delay opacity slightly */
+}
+
+/* Exiting state (starting point) */
+.row-exit {
+  opacity: 1;
+  max-height: 100px; /* Start from expanded height */
+}
+/* Exiting active state (target) */
+.row-exit-active {
+  opacity: 0;
+  max-height: 0;
+  transition: max-height 0.3s ease-in-out, opacity 0.2s ease-in-out;
+}
+
+/* Optional: Style for the inner content if needed */
+.row-content-inner {
+   /* You might add padding here if the wrapper handles collapsing */
+}
+
+/* Ensure table layout remains consistent during animation */
+.row-collapse-wrapper td {
+    /* Reset padding if needed, applied to inner div instead */
+    /* padding: 0; */
+    border: none; /* Hide borders on the intermediate wrapper TD */
+}
+/* Re-apply border to the inner content div if needed */
+/* .row-content-inner > div { border-bottom: 1px solid #e5e7eb; } */
