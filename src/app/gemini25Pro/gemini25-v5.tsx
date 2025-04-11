@@ -1,6 +1,7 @@
 import React, { useState, useMemo, Fragment, useEffect, useCallback, useRef } from 'react';
 // Import transition components
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
+import './v5.css'
 
 // --- Helper Functions (processSpans, getVisibleSpanIds, findSpanInTree, stringToColor) ---
 // ... (Keep these defined as in the previous step) ...
