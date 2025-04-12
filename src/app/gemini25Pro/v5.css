@@ -1,3 +1,6 @@
+
+
+
 /* Smooth Expand/Collapse Transitions */
 .row-collapse-wrapper {
   /* Base styles for the wrapper */
@@ -44,3 +47,22 @@
 }
 /* Re-apply border to the inner content div if needed */
 /* .row-content-inner > div { border-bottom: 1px solid #e5e7eb; } */
+
+
+
+
+/* Fade in/out transition for table rows */
+.row-fade-enter {
+  opacity: 0;
+}
+.row-fade-enter-active {
+  opacity: 1;
+  transition: opacity 300ms ease-out;
+}
+.row-fade-exit {
+  opacity: 1;
+}
+.row-fade-exit-active {
+  opacity: 0;
+  transition: opacity 200ms ease-in; /* Faster fade out */
+}
